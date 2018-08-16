@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    {# je peux aussi rappelé le header parent et rajouter qqch après
+     du coup il faut réflechir a ton site et a comment il est fait et créer des block
+     en général  title, meta, csss, header, file d'arianne, body, footer, script
+     Si par exemple ta un menu a droite tu peux rajouter un block pour le définir ect s'il change jamais tu le met dans partial
+     S'il est dynamique c'est un peu plus compliqué :p on vera peut etre ca plus tard
+
+     Des questions ?
+     cest tt clair
+     en gros schema du site sur une feuille tu fait des carré dse couleurs pour différencier des bouts
+     et ces bouts c'est des blocks :), tu créer un base avec tout les block, si ton site change d'apparence tu créer
+     une deuxieme base avec cette apparence la et tu extendera de ce fichier la
+     Tu include un maximum les chose pour divisé en morceau qui on du sens histoire de savoir ou chercher les chose
+     et pas avoir un twig de 5000 ligne et que des que ta une couille c la merde, comme ca ta directe le nom de ce qui foire
+     et je crois que c'est a peu pret tout, ah oui pour fosuser c un peu la merde,
+     il a deja définis ces extends et ces propres twig, du coup symfony il fait comme ca qd tu lui demander un twig
+
+     - 1 en premier il regarde dans app/Ressources/NomDuBundle/views/fichier.twig
+     - 2 il va ensuite regarder s'il existe un bundle qui etends de ce truc, genre si tu as ds ton src un FosUserBundle pour
+     remplacer la version normal des vendors de fosuser
+     - 3 Il va regarder dans les vendors si le twig existe par exemple si tu erclame @fosuser:login.twig, il va aller regarder
+     dans le vendors dans le bundle fosuser sil existe ce twig en dernier
+
+     Donc si tu veux remplacer les fichiers de base de FosUser (et je te conseille pas la technique 2 de remplacé fosuser en le copiant
+     dans ton src parce que qd tu mettra fosuser a jour ca garder le tiens et tu profitera pas des maj
+     Il faut creer dans app/Ressours/FOSUserBundle/views << et mettre les view de FOS
+
+     Voila en gros tu peux redefinir les twig des vendors prédefinis en les recopiant dans ton app/REssources/NomDuBundle
+     et tu change que la vue pas les fichiers php donc ta bien la logique qui sera mis a jour avec le bundle
+     mais tu gardes tes propres vues
+
+     Voilou, et pour modifier le code de FOS comme on a pas envie de toucher au vendors ou de surcoucher dans un bundle a nous
+     ce que tu fais c que tu attache des actions a des evenements
+     en gros tu ecoute l'evenement onLogin ou onRegistration qui seront toujours la a la prochaine mis a jour
+     Et tu créer des actions a ce moment la comme ca tu rajoute du code dans ton src/ qui ecoute mais tu modifie jamais
+     le code de base du bundle, et tu rajoute des actions a des moments clefs
+     typiquement dans ton cas il faut faire un onRegistration, et créer le client
+     et si tu veux que les clients et les Assistante maternelle arrive sur deux admin differentes
+     Tu rajoutera un onLoggin if client or if assistante matenrelle redirectTo
+     et tu laisse fos user intact
+
+     Capiche ?
+     ok je v mettre tt va en pratiq
+     dur dur
+     lol
+     ouai ta tout en détails sur les tutos mais la gestion d'évenements c la fin dans les pratiques avancés
+     c'est juste informatif pour le moment faait joujou avec tiwg et des propres entity joué avec des bundles externe
+     surtout le fosuser qui est un sacré enculé il faut juste savoir que c'est possible mais t'es pas encore prete :p
+     wep
+     voila j'espère que les twig sont plus clair sachant que tu as plein de truc dans twig pour t'aider
+     genre les for les filter avec | ect tu trouve tout dans la doc
+
+     C bon pour toi ?
+     oui ca va je vais te relire et continuer merci bcp et
+      good luck ca fera 2 heure du coup :p lol
+      allé tchoup pas de pb
+
+
+     #}
+    {{ parent() }}
+
+    <div>
+        Bienvenue sur la page a propos de nous
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    Il a garder toute la logique commune de base.html.twig, donc j'ai bootstrap et jquery
+    il a harder le header
+    et je change juste le block body avec mon contenu
+    <br>
+
+    Ici c'est le texte pour expliquer de quoi parle le site
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+{% endblock %}

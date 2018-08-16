@@ -2,5 +2,6 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
+    # en suivant les routes tu saura ou tu attteris si tu est perdu CTRL + clic pour aller au fichier
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

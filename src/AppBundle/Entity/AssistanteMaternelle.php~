@@ -1,0 +1,146 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: BlackHeroes972
+ * Date: 08/08/2018
+ * Time: 14:41
+ */
+
+namespace AppBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="AssistanteMaternelle")
+ */
+class AssistanteMaternelle extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=15, nullable=true)
+     */
+    private $tel;
+
+    /**
+     * @ORM\Column(type="integer", length=2 , nullable=true)
+     */
+    private $nb_agrements;
+
+
+
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return AssistanteMaternelle
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     *
+     * @return AssistanteMaternelle
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * Set tel
+     *
+     * @param string $tel
+     *
+     * @return AssistanteMaternelle
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
+    /**
+     * Get tel
+     *
+     * @return string
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
+     * Set nbAgrements
+     *
+     * @param integer $nbAgrements
+     *
+     * @return AssistanteMaternelle
+     */
+    public function setNbAgrements($nbAgrements)
+    {
+        $this->nb_agrements = $nbAgrements;
+
+        return $this;
+    }
+
+    /**
+     * Get nbAgrements
+     *
+     * @return integer
+     */
+    public function getNbAgrements()
+    {
+        return $this->nb_agrements;
+    }
+}

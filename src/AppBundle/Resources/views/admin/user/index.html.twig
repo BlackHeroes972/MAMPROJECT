@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>
+        <span>Utilisateurs</span>
+        <a class="btn btn-success" href="{{ path('user_form') }}">Ajouter un user</a>
+    </h1>
+
+    <table class="table table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Actif</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{% if user.active %}Oui{% else %}Non{% endif %}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('user_form', { 'id': user.id }) }}">modifier</a>
+                        </li>
+                        {% if user != app.user %}
+                        <li>
+                            <a href="{{ path('user_delete', { 'id': user.id }) }}">supprimer</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

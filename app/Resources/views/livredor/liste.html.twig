@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <ul>
+        {% for message in messages %}
+            <li>
+                <b>Date :</b> {{ message.createdAt|date("d/m/Y - H:i") }} <br>
+                <b>{{ message.pseudo|default(message.email) }} :</b> {{ message.message }} <br>
+                <a href="{{ path("deleteMessage", {id: message.id}) }}"><i class="fa fa-trash"></i></a>
+            </li>
+
+        {% endfor %}
+// Et voila c'est lheure de manger la suite au prochain numéro mais j'ai créer un truc pour remove le commentaire
+      //  et les afficher il manque le form a mettre a la fin de la liste quoi je v cherche le form
+       // et je v suivre cmt tu fais aller chercher les outils dont on a besoin soit ds la doc soit sur le net
+        // MERCI EN TT CAS JE CONTINUE A BOSSER DESSUS
+// t'es la :) ? ca mange aussi le repos du guerrier
+
+
+    </ul>
+
+{% endblock body %}

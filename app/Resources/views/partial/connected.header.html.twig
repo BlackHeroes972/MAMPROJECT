@@ -1,0 +1,53 @@
+<!-- Navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path("homepage") }}">MAM Les P'tits Câlins</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="">Mes Anonnces</a>
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('carnetliaison') }}">Carnet de Liaison</a>
+                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Mon compte</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path("fos_user_security_logout") }}">{{ app.user.username }} <i class="fas fa-sign-out-alt"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+// voila il suffit de faire path("et de rechercher dans les route les lien qui t'interesse login et logout
+// j'ai rajouté les icon fontawesome pour habiller un peu l'outil
+// j'ai passé l'outil en FR pour que les traduction de fosuserbundle s'applique
+// et j'ai rajouté le pseudo vite fait tu pourra le changer de place c'était juste pour te montrer que tout est dans app.user
+
+D'autre questions ?
+
+//C good
+// bas y :vles controllers on met d route dedans jnarrive pas trop a comprendre le role
+// le role des controlleurs ? oui
+
+// alors symfony c'est un design pattern MVC model vue controller, en gros il faut séparer le code
+- Le modèle c'est tout ce qui est base de données, c'est les entités et les repository pour rechercher dans la bdd
+- Le controller c'est toute la logique requete -> reponse
+- Et la vue c'est la vue
+
+
+En gros tu demander une page -> le firewall regarde si ta les droits -> le retour regarde s'il existe une route correspondante
+Si oui il lance le controller qui va avec cette route qui est charger de livrer la réponse.
+Le controller il va appelé les modèle, ou les services nécessaire à l'execution de la reponse et juste renvoyé la vue
+du coup il lui faut juste une route pour savoir de qu'elle url il est responsable, et faut qu'en sortie il donne une réponse
+
+Et en général des que la logique du controller devient trop complexe c'est a dire si le controller fait plus de 10 ligne
+c'est qui faut surement créer un service ou un modèle, le controller doit rester simple c vraiment la substance moel logique
+qui passe de la requete utilisateur a la reponse serveur
+Voilou le MVC c plus pratique parce que qd ta un bleme tu vois tout de suite qui est responsable, tu as la route et le controller impliqué
+et si tu va matter la debug barre
