@@ -36,6 +36,32 @@ class User extends BaseUser
    // ca doit etre moi comme ça vient e demarrer
     //  ok je vais essayer d'ajouter le reste des live template
 
+    // ok est la comment tu sais que le user c'est un client et lequel c'est, ou que c'est une assistante et laquelle c'est :p
+    //heu la jss perdu
+    // bin tu créer un compte au depart, et ca te créer un user (pas un Client deja), donc du coup faut relier user a client
+    // en gros ton user ca peut etre soit un client soit une assistante maternelleok
+
+    // du coup y a un truc que je comprend pas ds ton outils, c'est l'assistante maternelle qui créer les comptes des parents
+    // sinon comme savoir s'il s'inscrive faut rentrer leur enfant, et l'assistante maternelle ?
+    // bin au depart les parents et lassistmat signe un contrat un fois ke c signer
+    // lassismatt creer un compte pour le parent et fournit acces
+    // oké donc c'est l'assistante maternelle qui créer le compte clientouii voilo
+    // et tu devoir te taper l'admin de tout ca ? genre va falloir rentrer les gosses, les nom, ect ? voilaaa
+    // dans l'admin assistante maternelle y aura un onglet mes clients et créer un nouvau client avec le formulaire et tout ?exact
+    // ok
+
+    /**
+     * @var Client
+     * @ORM\OneToOne(targetEntity="Client", cascade={"persist"}, inversedBy="user")
+     */
+    private $client;
+
+    /**
+     * @var AssistanteMaternelle
+     * @ORM\OneToOne(targetEntity="AssistanteMaternelle", cascade={"persist"}, inversedBy="user")
+     */
+    private $assistanteMaternelle;
+
     /**
      * @ORM\Column(type="string", nullable=true)
      */
@@ -45,7 +71,6 @@ class User extends BaseUser
      * @ORM\Column(type="string", nullable=true)
      */
     private $lastname;
-
 
     public function getFullName()
     {
@@ -103,5 +128,51 @@ class User extends BaseUser
     public function getLastname()
     {
         return $this->lastname;
+    }
+
+    /**
+     * @return Client
+     */
+    public function getClient(): Client
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param Client $client
+     * @return User
+     */
+    public function setClient(Client $client): User
+    {
+        $this->client = $client;
+        return $this;
+    }
+
+    /**
+     * @return AssistanteMaternelle
+     */
+    public function getAssistanteMaternelle(): AssistanteMaternelle
+    {
+        return $this->assistanteMaternelle;
+    }
+
+    /**
+     * @param AssistanteMaternelle $assistanteMaternelle
+     * @return User
+     */
+    public function setAssistanteMaternelle(AssistanteMaternelle $assistanteMaternelle): User
+    {
+        $this->assistanteMaternelle = $assistanteMaternelle;
+        return $this;
+    }
+
+    public function isClient()
+    {
+        return $this->client != null;
+    }
+
+    public function isAssistanteMaternelle()
+    {
+        return $this->assistanteMaternelle != null && $this->hasRole("ROLE_ADMIN");
     }
 }

@@ -20,13 +20,10 @@ class DefaultController extends Controller
         // ici j'apelle les modele
         $em = $this->getDoctrine()->getManager();
         $repoAssistanteMaternelle = $em->getRepository(AssistanteMaternelle::class);
-        $repoEnfant = $em->getRepository(Enfant::class);
-        $enfants = $repoEnfant->findAll();
         $assistanteMaternelles = $repoAssistanteMaternelle->findAll();
 
         // je retourne une réponse
-        return $this->render('base.html.twig', [
-            "enfants" => $enfants,
+        return $this->render(':page:test.html.twig', [
             "assistanteMaternelles" => $assistanteMaternelles
         ]);
     }

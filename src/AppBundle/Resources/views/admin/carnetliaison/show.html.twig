@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h1>Carnet de Liaison : {{ carnetliaison.title }}</h1>
+    <h1>Carnet de Liaison : {{ carnetliaison.id }}</h1>
 
     <table class="table table-sm">
         <thead class="thead-dark">
@@ -13,14 +13,18 @@
                 <th>Repas</th>
                 <th>Consignes</th>
                 <th>Important</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>{{ carnetliaison.id }}</td>
-                <td>{{carnetliaison.date }}</td>
-                <td>{{ carnetliaison.activites}}</td>
-                <td>{{ carnetliaison.repas}}</td>
+                <td>{{ carnetliaison.date|date("m/d/Y") }}</td>
+                <td>
+                    {% for activite  in carnetliaison.activites %}
+                        {{ activite }},
+                    {% endfor %}
+                </td>                <td>{{ carnetliaison.repas}}</td>
                 <td>{{ carnetliaison.consignes}}</td>
                 <td>{{carnetliaison.important }}</td>
             </tr>

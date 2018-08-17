@@ -55,7 +55,7 @@ class CarnetLiaisonController extends Controller
      */
     public function showAction(CarnetLiaison $carnetliaison)
     {
-        return $this->render('@App/admin/carnetliaison/show.html.twig', ['carnetliaison'=>carnetliaison]);
+        return $this->render('@App/admin/carnetliaison/show.html.twig', ['carnetliaison'=>$carnetliaison]);
     }
 
     /**
@@ -119,12 +119,12 @@ class CarnetLiaisonController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()){
 
-            if (!$book->getEnfant ()[0]) {
+            if (!$carnetliaison->getEnfant ()[0]) {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($carnetliaison);
                 $em->flush();
 
-                $this->addFlash('success','Vous avez supprimé '. $carnetliaison->getTitle() .'.');
+                $this->addFlash('success','Vous avez supprimé '. $carnetliaison->getId() .'.');
             }
             else {
                 $this->addFlash('error','Vous ne pouvez pas supprimer un carnet de liaison en cours !');

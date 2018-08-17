@@ -37,6 +37,7 @@ class CarnetLiaisonType extends AbstractType
                         'attr' => ['class' => 'js-datepicker', 'autocomplete' => 'off'],
                         'label' => "Date"
                     ))
+
             // il existe un type choice qui permet de faire des selecteurs
                 // je l'ai réglé sur multiple = true car il a plusieurs choix possible
                 // et je lui ai donner comme combinaison de choix la constante de classe ACTIVITES
@@ -48,9 +49,9 @@ class CarnetLiaisonType extends AbstractType
                     'label' => "Les Activités",
                     'multiple' => true,
                 ])
-                ->add('repas')
-                ->add('consignes')
-                ->add('important');
+            ->add('repas')
+            ->add('consignes')
+            ->add('important');
     }/**
      * {@inheritdoc}
      */

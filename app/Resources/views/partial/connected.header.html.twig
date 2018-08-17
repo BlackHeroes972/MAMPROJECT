@@ -8,15 +8,13 @@
         {% if is_granted("ROLE_ADMIN") %}
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item {% if 'enfant' in app.request.requestUri %}active{% endif %}">
-                        <a class="nav-link" href="#">Enfant</a>
+                    <li class="nav-item {% if 'client' in app.request.requestUri %}active{% endif %}">
+                        <a class="nav-link" href="#">Client</a>
                     </li>
                     <li class="nav-item {% if 'carnetliaison' in app.request.requestUri %}active{% endif %}">
                         <a class="nav-link" href="{{ path('carnetliaison_index') }}">Carnet de Liaison</a>
                     </li>
-                    <li class="nav-item {% if 'user' in app.request.requestUri %}active{% endif %}">
-                        <a class="nav-link" href=""{{ path('user_index') }}>Utilisateurs</a>
-                    </li>
+
                 </ul>
             </div>
             <div><a href="{{ path('fos_user_security_logout') }}" class="btn btn-sm btn-info">Se déconnecter</a></div>

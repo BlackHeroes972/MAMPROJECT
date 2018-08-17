@@ -71,6 +71,8 @@ class CarnetLiaison
     private $repas;
 
     /**
+     * consigne c perso dc visible ke par les parents dun enfant
+     *
      * @ORM\Column(type="text", length=250, nullable=true)
      */
     private $consignes;
@@ -130,6 +132,53 @@ class CarnetLiaison
     /// on saura que carnetDeliaison dans ton outils ca veu dire rapport de la journée
     /// voila
 
+    // alors une assistante maternelle peut avoir plusieurs carnet de liaison voila
+    //mais c le meme pour tous les enfants quelle garde, y a pas dinfoi propre a l'enfant dedans genre ces notes
+    // ou son attitude c vraiment juste les activités quelle va faire elle avec tous les enfants
+    // le carnet est personnel donc le parent peut voir ke son carnet de son gosse en se connectant pas les otr
+    // mais y a des infos sur sont gosse dessus ou c juste des info générique et tous les gosses de la nonou
+    // on le meme carnet du coup, genre la nounou elle va devoir remplir un seul carnet par jour
+    // ou autant de carnet qui a de gosse
+    //chq jour elle devra remplie un carnet et y mettre dans consigne d consigne pour les parents
+    // genre nest pas propore etc c person
+    // du coup si elle a 50 enfant elle doit remplir 50 cahier de liaison par jour autant ce flinguer quoi
+    // c vrai arff keske tu me conseilles de fai
+    // bin pour moi c des consigne générique genre on va faire de la peinture donc pensé a des fringues pourri
+    // mais c vrai pour tous les enfants, elle donne pas des consigne a chaque gosse
+    // surtout qu'elle doit remplir je supose avant les activités donc elle connait pas forcement les gosses
+    // en gros soit on met le carnet sur le gamin, donc la faudra créer autant de carnet que de gamin
+    // mais ils auront chacun le leur personnalisé, soit on fait un générique et ca donne en gros
+    // une sorte de carnet générique pour tous les parents qui sache ce leur gamin va faire
+    // mais tous les parents on le meme (si c la meme nounou)
+    // jpars plus surr ça soit on met le carnet sur le gamin, donc la faudra créer autant de carnet que de gamin
+    //    // mais ils auront chacun le leur personnalisédo
+    // donc si elle doit remplir chaque jour et pas a la semaine pour 30 gamin ca lui fait 300x 30 carnet a remplir
+    // mais elle nen a ke 3 jtrouv ke c faisable
+    //enfait mon pb c ke je veux ke cha carnet soit priveee dc consultable ke par le parent de lenfant concerner
+    // ok donc c sur enfant
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Enfant", inversedBy="carnetLiaisons")
+     */
+    private $enfant;
+
+    /**
+     * @param Enfant $enfant
+     * @return $this
+     */
+    public function setEnfant(Enfant $enfant)
+    {
+        $this->enfant = $enfant;
+        return $this;
+    }
+
+    /**
+     * @return Enfant
+     */
+    public function getEnfant()
+    {
+        return $this->enfant;
+    }
 
     /**
      * Get id

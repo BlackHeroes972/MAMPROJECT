@@ -1,13 +1,45 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Carnet de liaison : </h1>
+    <h1>Carnet de liaison : {{ carnetliaison.id }} </h1>
 
     {{ form_start(form) }}
 
+    <div class="formcell col-md-6">
+        {{ form_label(form.date, 'Date') }}
+        {{ form_widget(form.date) }}
+    </div>
+    <div class="formcell col-md-6">
+        {{ form_label(form.activites, 'Activites') }}
+        {{ form_widget(form.activites) }}
+    </div>
+    <div class="formcell col-md-6">
+        {{ form_label(form.repas, 'Repas') }}
+        {{ form_widget(form.repas) }}
+    </div>
+    <div class="formcell col-md-6">
+        {{ form_label(form.consignes, 'Consignes') }}
+        {{ form_widget(form.consignes) }}
+    </div>
+    <div class="formcell col-md-6">
+        {{ form_label(form.important, 'Important') }}
+        {{ form_widget(form.important) }}
+    </div>
     <input type="submit" value="Valider" />
 
     {{ form_end(form) }}
+
+    <ul class="list-unstyled">
+        {% if carnetliaison.id is not null %}
+            <li>
+                <a href="{{ path('carnetliaison_delete', { 'id': carnetliaison.id }) }}">supprimer</a>
+            </li>
+        {% endif %}
+        <li>
+            <a href="{{ path('carnetliaison_index') }}">retour</a>
+        </li>
+
+    </ul>
 
 
 {% endblock %}

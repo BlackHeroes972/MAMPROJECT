@@ -17,6 +17,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Adresse
 {
+
+    // adresse c'est lié a client je suppose oui et contrat aussi oui
+    // bon je te laisserai faire les OneToOne
+    //ok
+    // vérifions deja si ca marche tout ca
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

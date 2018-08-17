@@ -46,58 +46,58 @@ class AssistanteMaternelle
     private $nb_agrements;
 
     /**
-     * @var ArrayCollection|Enfant[]
-     * @ORM\OneToMany(targetEntity="Enfant", mappedBy="assistanteMaternelle", cascade={"persist"})
+     * @var User
+     * @ORM\OneToOne(targetEntity="User", mappedBy="assistanteMaternelle")
      */
-    private $enfants;
+    private $user;
+
+    /**
+     * @var ArrayCollection|Client[]
+     * @ORM\OneToMany(targetEntity="Client", mappedBy="assistanteMaternelle", cascade={"persist"})
+     */
+    private $clients;
+
+    /**
+     * @return Client[]|ArrayCollection
+     */
+    public function getClients()
+    {
+        return $this->clients;
+    }
+
+    /**
+     * @param Client $client
+     * @return $this
+     */
+    public function addClient(Client $client)
+    {
+        if (!$this->clients->contains($client)) {
+            $this->clients[] = $client;
+            $client->setAssistanteMaternelle($this);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Client $client
+     * @return $this
+     */
+    public function removeClient(Client $client)
+    {
+        if ($this->clients->contains($client)) {
+            $this->clients->removeElement($client);
+            $client->setAssistanteMaternelle(null);
+        }
+        return $this;
+    }
+
 
     // a la construction de mon objet je dis que $this->enfants est un ArrayCollection
     public function __construct()
     {
-        $this->enfants = new ArrayCollection();
+        $this->client = new ArrayCollection();
     }
 
-    /**
-     * @return Enfant[]|ArrayCollection
-     */
-    public function getEnfants()
-    {
-        return $this->enfants;
-    }
-
-    /**
-     * @param Enfant $enfant
-     * @return $this
-     */
-    public function addEnfant(Enfant $enfant)
-    {
-        // si le array enfants ne contient pas déjà cette enfant pour éviter d'ajouter 2 fois
-        if (!$this->enfants->contains($enfant)) {
-            //  j'ajoute enfants dans le [] enfant
-            $this->enfants[] = $enfant;
-            // et je set la relation opposé je dit que pour enfant l'assistante maternelle c'est $this
-            // car l'assistante maternelle c'est l'objet en cours
-            $enfant->setAssistanteMaternelle($this);
-        }
-        return $this;
-    }
-
-    /**
-     * @param Enfant $enfant
-     * @return $this
-     */
-    public function removeEnfant(Enfant $enfant)
-    {
-        // si mon array d'enfant contient l'enfant en question je le supprime pour eviter de supprimer
-        // un truc qui existe pas pour pas avoir d'erreur
-        if ($this->enfants->contains($enfant)) {
-            // je remove l'enfants du aray
-            $this->enfants->removeElement($enfant);
-            // et je set la liaison opossé a null pour dire que cette enfant n'a pas d'assistante maternelle
-            $enfant->setAssistanteMaternelle(null);
-        }
-        return $this;
-    }
 
     // on remarque que j'utilise enfants [} comme un array spécial qui a des fonctions
     // genre removeElement ou contains, c'est parce que c'erst un super Array symfony
@@ -199,5 +199,23 @@ class AssistanteMaternelle
     public function getNbAgrements()
     {
         return $this->nb_agrements;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     * @return Client
+     */
+    public function setUser(User $user): Client
+    {
+        $this->user = $user;
+        return $this;
     }
 }

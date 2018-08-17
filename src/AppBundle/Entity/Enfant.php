@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,26 +53,71 @@ class Enfant
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AssistanteMaternelle", inversedBy="enfants")
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="enfants")
      */
-    private $assistanteMaternelle;
+    private $parent;
 
     /**
-     * @param AppBundle\Entity\AssistanteMaternelle $assistanteMaternelle
+     * @var ArrayCollection|CarnetLiaison[]
+     * @ORM\OneToMany(targetEntity="CarnetLiaison", mappedBy="enfant", cascade={"persist"})
+     */
+    private $carnetLiaisons;
+
+    public function __construct()
+    {
+        $this->carnetLiaisons = new ArrayCollection();
+    }
+
+    /**
+     * @return CarnetLiaison[]|ArrayCollection
+     */
+    public function getCarnetLiaisons()
+    {
+        return $this->carnetLiaisons;
+    }
+
+    /**
+     * @param CarnetLiaison $carnetLiaison
      * @return $this
      */
-    public function setAssistanteMaternelle(AppBundle\Entity\AssistanteMaternelle $assistanteMaternelle)
+    public function addCarnetLiaison(CarnetLiaison $carnetLiaison)
     {
-        $this->assistanteMaternelle = $assistanteMaternelle;
+        if (!$this->carnetLiaisons->contains($carnetLiaison)) {
+            $this->carnetLiaisons[] = $carnetLiaison;
+            $carnetLiaison->setEnfant($this);
+        }
         return $this;
     }
 
     /**
-     * @return AppBundle\Entity\AssistanteMaternelle
+     * @param CarnetLiaison $carnetLiaison
+     * @return $this
      */
-    public function getAssistanteMaternelle()
+    public function removeCarnetLiaison(CarnetLiaison $carnetLiaison)
     {
-        return $this->assistanteMaternelle;
+        if ($this->carnetLiaisons->contains($carnetLiaison)) {
+            $this->carnetLiaisons->removeElement($carnetLiaison);
+            $carnetLiaison->setEnfant(null);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Client $parent
+     * @return $this
+     */
+    public function setParent(Client $parent)
+    {
+        $this->parent = $parent;
+        return $this;
+    }
+
+    /**
+     * @return Client
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     /**
