@@ -7,7 +7,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\Table(name="user")
  */
 class User extends BaseUser
@@ -36,9 +36,72 @@ class User extends BaseUser
    // ca doit etre moi comme ça vient e demarrer
     //  ok je vais essayer d'ajouter le reste des live template
 
-    public function __construct()
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $lastname;
+
+
+    public function getFullName()
     {
-        parent::__construct();
-        // your own logic
+        return $this->firstname . " " . $this->lastname;
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole("ROLE_ADMIN");
+    }
+
+    /**
+     * Set firstname
+     *
+     * @param string $firstname
+     *
+     * @return User
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * Get firstname
+     *
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Set lastname
+     *
+     * @param string $lastname
+     *
+     * @return User
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * Get lastname
+     *
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
     }
 }

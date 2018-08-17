@@ -12,10 +12,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * du coup tu a choisi de extend de user donc y a pas d'ajout de jointure dans user
- * ta choisi la méthode propre mais plus dur, soit l'objet et indépendant de user et de le joint
- * soit il est un user et tu différencie les 2
- * du coup tu as dit que tu preferais la jointure dans user non ?
  * @ORM\Entity
  * @ORM\Table(name="AssistanteMaternelle")
  */

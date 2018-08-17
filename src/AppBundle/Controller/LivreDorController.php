@@ -7,9 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * tu peux créer des controller pour isoler des partie de l'outil et t'en servir pour les prefixé
- * c'est plus pratique ensuite pour t'y retrouver dans ton code qu'un seul controller de 5000 lignes
- * voila d'autre question ou tu veux voir un exemple de comment je créerai le livre d'or et je connecterai le modèle ? oui tp
  * @Route("/livre-d-or")
  */
 class LivreDorController extends Controller

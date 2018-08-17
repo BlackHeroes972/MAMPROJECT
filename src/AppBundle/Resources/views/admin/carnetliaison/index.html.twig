@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>
+        <span>Carnet de Liaison</span>
+        {% if is_granted("ROLE_ADMIN") %}
+            <a class="btn btn-success" href="{{ path('carnetliaison_form') }}">Ajouter un carnet de liaison</a>
+        {% endif %}
+    </h1>
+
+    <table class="table table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Activites</th>
+                <th>Repas</th>
+                <th>Consignes</th>
+                <th>Important</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for carnetliaison in carnetliaisons %}
+            <tr>
+                <td>{{ carnetliaison.id }}</td>
+                <td>{{ carnetliaison.date|date("m/d/Y") }}</td>
+                <td>
+                        {% for activite  in carnetliaison.activites %}
+                            {{ activite }},
+                        {% endfor %}
+                </td>
+                <td>{{ carnetliaison.repas }}</td>
+                <td>{{ carnetliaison.consignes }}</td>
+                <td>{{ carnetliaison.important }}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{{ path('carnetliaison_show', { 'id': carnetliaison.id }) }}">détails</a>
+                        </li>
+
+                        {% if is_granted("ROLE_ADMIN") %}
+                        <li>
+                            <a href="{{ path('carnetliaison_form', { 'id': carnetliaison.id }) }}">modifier</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('carnetliaison_delete', { 'id': carnetliaison.id }) }}">supprimer</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

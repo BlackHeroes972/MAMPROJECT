@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <h1>Carnet de Liaison : {{ carnetliaison.title }}</h1>
+
+    <table class="table table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Activites</th>
+                <th>Repas</th>
+                <th>Consignes</th>
+                <th>Important</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ carnetliaison.id }}</td>
+                <td>{{carnetliaison.date }}</td>
+                <td>{{ carnetliaison.activites}}</td>
+                <td>{{ carnetliaison.repas}}</td>
+                <td>{{ carnetliaison.consignes}}</td>
+                <td>{{carnetliaison.important }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="list-unstyled">
+
+        {% if is_granted("ROLE_ADMIN") %}
+        <li>
+            <a href="{{ path('carnetliaison_form', { 'id': carnetliaison.id }) }}">modifier</a>
+        </li>
+        <li>
+            <a href="{{ path('carnetliaison_delete', { 'id': carnetliaison.id }) }}">supprimer</a>
+        </li>
+        {% endif %}
+
+        <li>
+            <a href="{{ path('carnetliaison_index') }}">retour</a>
+        </li>
+    </ul>
+
+{% endblock %}
